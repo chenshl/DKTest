@@ -1,0 +1,67 @@
+[INFO][send][2018-09-08 14:53:42,831]请求接口：exchange/order/orderInfo--请求参数：{'orderId': 'E211127401079312384'}
+[INFO][send][2018-09-08 14:53:43,076]响应时长：243.5--响应状态:200--响应结果：{"code":4000,"message":"unauthorized"}
+[INFO][send][2018-09-08 14:53:54,952]请求接口：uc/announcement/page--请求参数：{'pageNo': '1', 'pageSize': '10'}
+[INFO][send][2018-09-08 14:53:55,288]响应时长：336.0--响应状态:200--响应结果：{
+  "code" : 0,
+  "message" : "SUCCESS",
+  "data" : {
+    "content" : [ {
+      "id" : 2,
+      "title" : "功夫换个挂号费",
+      "content" : "",
+      "createTime" : "2018-04-28 16:07:40",
+      "isShow" : true,
+      "imgUrl" : null,
+      "sort" : 11,
+      "pvCount" : 0
+    }, {
+      "id" : 6,
+      "title" : "CALL将于2018年5月27日下架本交易平台的公告",
+      "content" : "",
+      "createTime" : "2018-05-24 16:53:06",
+      "isShow" : true,
+      "imgUrl" : null,
+      "sort" : 9,
+      "pvCount" : 0
+    }, {
+      "id" : 7,
+      "title" : "提币公告",
+      "content" : "",
+      "createTime" : "2018-05-24 16:56:31",
+      "isShow" : true,
+      "imgUrl" : null,
+      "sort" : 8,
+      "pvCount" : 0
+    }, {
+      "id" : 11,
+      "title" : "2333",
+      "content" : "",
+      "createTime" : "2018-08-24 15:36:46",
+      "isShow" : true,
+      "imgUrl" : null,
+      "sort" : 0,
+      "pvCount" : 0
+    }, {
+      "id" : 10,
+      "title" : "321",
+      "content" : "",
+      "createTime" : "2018-08-24 15:35:50",
+      "isShow" : true,
+      "imgUrl" : null,
+      "sort" : 0,
+      "pvCount" : 0
+    }, {
+      "id" : 9,
+      "title" : "【系统升级】8月15日 17:00-17:30 将进行系统升级！",
+      "content" : "",
+      "createTime" : "2018-08-15 15:51:56",
+      "isShow" : true,
+      "imgUrl" : null,
+      "sort" : 0,
+      "pvCount" : 0
+    } ],
+    "number" : 0,
+    "size" : 10,
+    "totalElements" : 6
+  }
+}
