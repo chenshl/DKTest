@@ -35,8 +35,8 @@ class connect_mysql():
         else:
             self.connect.commit()
             self.mysql_result = self.cursor.fetchall()
-            print("执行SQL：{}".format(complySql))
-            print("数据库事务处理成功。。。")
+            # print("执行SQL：{}".format(complySql))
+            # print("数据库事务处理成功。。。")
 
             return self.mysql_result
         finally:
