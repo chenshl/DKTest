@@ -110,6 +110,16 @@ from common.base import DKApiBase
 # serverc = "uc/asset/wallet"
 # data = {}
 
+
+# 19、疯狂的比特游戏领取奖励
+# serverc = "guess-api/guessActivity/receiveAward"
+# data = {"periodId":"4"}
+
+# 20、疯狂的比特游戏领取红包
+serverc = "guess-api/guessActivity/openRedPacket"
+data = {"id":"74773",
+        "periodId":"4"}
+
 # r = request2DKApi(serverc, data).send(requestMark)
 r = request2DKApi(serverc, data).send()
 print(r)
