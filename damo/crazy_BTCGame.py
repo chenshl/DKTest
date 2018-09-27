@@ -54,14 +54,6 @@ class crazy_BTCGame(object):
         happy_money = 0
     print("当期中奖金额: {}".format(happy_money))
 
-    # 当期已领取红包金额
-    try:
-        received_redpacket_money = float(connect_mysql().connect2mysql("SELECT SUM(reward_num) FROM pg_reward WHERE period_id = {} AND business_type = 1 AND `status` = 4;".format(configid))[0][0])
-    except Exception as e:
-        # print(e)
-        received_redpacket_money = 0
-    print("当期已领取红包金额: {}".format(received_redpacket_money))
-
     # 当期已领取的奖励
     try:
         received_money = float(connect_mysql().connect2mysql("SELECT SUM(reward_num) FROM pg_reward WHERE period_id = {} AND business_type = 0 AND `status` = 1;".format(configid))[0][0])
@@ -69,14 +61,6 @@ class crazy_BTCGame(object):
         # print(e)
         received_money = 0
     print("当期已领取的奖励: {}".format(received_money))
-
-    # 本期累计到下期奖池总金额
-    try:
-        this_follow_money = float(connect_mysql().connect2mysql("SELECT SUM(jackpot_balance + redpacket_balance) FROM pg_jackpot WHERE period_id = {};".format(configid))[0][0])
-    except Exception as e:
-        # print(e)
-        this_follow_money = 0
-    print("本期累计到下期奖池总金额: {}".format(this_follow_money))
 
     # 本期分配红包总金额
     # this_redpacket_money = all_bet_num * 0.05
@@ -86,13 +70,29 @@ class crazy_BTCGame(object):
         this_redpacket_money = 0
     print("本期分配红包总金额: {}".format(this_redpacket_money))
 
+    # 当期已领取红包金额
+    try:
+        received_redpacket_money = float(connect_mysql().connect2mysql("SELECT SUM(reward_num) FROM pg_reward WHERE period_id = {} AND business_type = 1 AND `status` = 4;".format(configid))[0][0])
+    except Exception as e:
+        # print(e)
+        received_redpacket_money = 0
+    print("当期已领取红包金额: {}".format(received_redpacket_money))
+
+    # 本期累计到下期奖池总金额
+    try:
+        this_follow_money = float(connect_mysql().connect2mysql("SELECT SUM(jackpot_balance + redpacket_balance) FROM pg_jackpot WHERE period_id = {};".format(configid))[0][0])
+    except Exception as e:
+        # print(e)
+        this_follow_money = 0
+    print("本期累计到下期奖池总金额: {}".format(this_follow_money))
+
     # 奖金计算
-    # 当期奖池金额
+    # 当期中奖分配奖池金额
     if isredpackge == 1:
         this_money = all_money - all_bet_num * 0.25 - push_money
     elif isredpackge == 0:
         this_money = all_money - all_bet_num * 0.2 - push_money
-    print("当期奖池金额: {}".format(this_money))
+    print("当期中奖分配奖池金额: {}".format(this_money))
 
     # 用户奖励计算
     if received_money == 0:
@@ -118,7 +118,7 @@ class crazy_BTCGame(object):
     print("累计到下期的红包金额: {}".format(follow_redpacket_money))
 
     # 总金额核对  本期投票金额+上期总结余金额 = 本期已领取分佣金额 + 本期已红包领取金额 + 本期回购金额 + 本期已领取奖励金额 + 累计到下期奖池（奖励+红包）
-    # result = push_money + received_redpacket_money + repurchase_money + received_money + this_follow_money
+    result = push_money + received_redpacket_money + repurchase_money + received_money + this_follow_money
     if result == all_money:
         print("本期共进金额：{}=本期共出金额：{}".format(all_money, result))
     else:
