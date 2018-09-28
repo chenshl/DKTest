@@ -12,11 +12,11 @@ class crazy_BTCGame(object):
     """
 
     # 游戏期数
-    configid = 5
+    configid = 6
     # 用户单注投注金额
     user_bet_money = 200
     # 是否开启红包：1-是，0-否
-    isredpackge = 0
+    isredpackge = 1
 
     # 当期用户总投币数
     all_bet_num = float(connect_mysql().connect2mysql("SELECT SUM(bet_num) FROM pg_betting_record WHERE period_id = {};".format(configid))[0][0])
@@ -63,7 +63,6 @@ class crazy_BTCGame(object):
     print("当期已领取的奖励: {}".format(received_money))
 
     # 本期分配红包总金额
-    # this_redpacket_money = all_bet_num * 0.05
     if isredpackge == 1:
         this_redpacket_money = all_money * 0.05
     elif isredpackge == 0:
@@ -89,10 +88,8 @@ class crazy_BTCGame(object):
     # 奖金计算
     # 当期中奖分配奖池金额
     if isredpackge == 1:
-        # this_money = all_money - all_bet_num * 0.25 - push_money
         this_money = all_money - all_money * 0.25 - push_money
     elif isredpackge == 0:
-        # this_money = all_money - all_bet_num * 0.2 - push_money
         this_money = all_money - all_money * 0.2 - push_money
     print("当期中奖分配奖池金额: {}".format(this_money))
 
@@ -102,7 +99,6 @@ class crazy_BTCGame(object):
         user_get_money = 0
     else:
         if isredpackge == 1:
-            # user_get_money = (all_money - all_bet_num * 0.25 - push_money) / happy_money * user_bet_money
             user_get_money = (all_money - all_money * 0.25 - push_money) / happy_money * user_bet_money
         elif isredpackge == 0:
             user_get_money = (all_money - all_money * 0.2 - push_money) / happy_money * user_bet_money
@@ -112,11 +108,9 @@ class crazy_BTCGame(object):
 
     # 下期奖池沉淀计算  下期结余=奖池金额+本期沉淀-已经领取的奖励
     if isredpackge == 1:
-        # follow_money = this_money + all_bet_num * 0.05 - received_money
-        follow_money = this_money + all_money * 0.05 - received_money  #老杨修改后都应按照all_money（投注+上期结余）计算分配比例
+        follow_money = this_money + all_money * 0.05 - received_money
     elif isredpackge == 0:
-        # follow_money = this_money - received_money  # this_money未扣除红包
-        follow_money = this_money + all_money * 0.05 - received_money  #老杨修改后都应按照all_money（投注+上期结余）计算分配比例
+        follow_money = this_money + all_money * 0.05 - received_money
     # print("当期奖池金额{} + 5%下期沉淀{} - 当期已领取的奖励{} = {}".format(this_money, all_bet_num * 0.05, received_money, follow_money))
     print("下期奖池沉淀计算: {}".format(follow_money))
 
