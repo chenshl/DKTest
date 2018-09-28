@@ -12,11 +12,11 @@ class crazy_BTCGame(object):
     """
 
     # 游戏期数
-    configid = 1
+    configid = 5
     # 用户单注投注金额
     user_bet_money = 200
     # 是否开启红包：1-是，0-否
-    isredpackge = 1
+    isredpackge = 0
 
     # 当期用户总投币数
     all_bet_num = float(connect_mysql().connect2mysql("SELECT SUM(bet_num) FROM pg_betting_record WHERE period_id = {};".format(configid))[0][0])
@@ -89,9 +89,11 @@ class crazy_BTCGame(object):
     # 奖金计算
     # 当期中奖分配奖池金额
     if isredpackge == 1:
-        this_money = all_money - all_bet_num * 0.25 - push_money
+        # this_money = all_money - all_bet_num * 0.25 - push_money
+        this_money = all_money - all_money * 0.25 - push_money
     elif isredpackge == 0:
-        this_money = all_money - all_bet_num * 0.2 - push_money
+        # this_money = all_money - all_bet_num * 0.2 - push_money
+        this_money = all_money - all_money * 0.2 - push_money
     print("当期中奖分配奖池金额: {}".format(this_money))
 
     # 用户奖励计算
@@ -109,7 +111,12 @@ class crazy_BTCGame(object):
     print("用户获取奖励：{}".format(user_get_money))
 
     # 下期奖池沉淀计算  下期结余=奖池金额+本期沉淀-已经领取的奖励
-    follow_money = this_money + all_bet_num * 0.05 - received_money
+    if isredpackge == 1:
+        # follow_money = this_money + all_bet_num * 0.05 - received_money
+        follow_money = this_money + all_money * 0.05 - received_money  #老杨修改后都应按照all_money（投注+上期结余）计算分配比例
+    elif isredpackge == 0:
+        # follow_money = this_money - received_money  # this_money未扣除红包
+        follow_money = this_money + all_money * 0.05 - received_money  #老杨修改后都应按照all_money（投注+上期结余）计算分配比例
     # print("当期奖池金额{} + 5%下期沉淀{} - 当期已领取的奖励{} = {}".format(this_money, all_bet_num * 0.05, received_money, follow_money))
     print("下期奖池沉淀计算: {}".format(follow_money))
 
@@ -123,6 +130,7 @@ class crazy_BTCGame(object):
         print("本期共进金额：{}=本期共出金额：{}".format(all_money, result))
     else:
         print("本期共进金额：{}!=本期共出金额：{}".format(all_money, result))
+    print("注：由于部分扣除计算比例的时候按总奖池累计后计算，部分按当期投注总金额计算，因此总进账与总出账之间数据不相等。")
 
 
 
