@@ -43,6 +43,9 @@ class request2DKApi(object):
             elif requestMark == "POST":
                 print("请求地址：{}  请求方式：{}--请求参数{}".format(self.url + self.server, requestMark, self.data))
                 self.req = requests.post(self.requrl, self.data, headers=self.header)
+            elif requestMark == "PATCH":
+                print("请求地址：{}  请求方式：{}--请求参数{}".format(self.url + self.server, requestMark, self.data))
+                self.req = requests.patch(self.requrl,self.data)
             self.aftertime = time.time()
             self.reqtime = str(round((self.aftertime - self.beforetime) * 1000, 3))
             logger.info("响应时长：{}--响应状态:{}--响应结果：{}".format(self.reqtime,self.req.status_code, self.req.text))

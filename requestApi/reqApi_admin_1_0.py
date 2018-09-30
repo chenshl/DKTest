@@ -60,14 +60,21 @@ from common.base import DKApiBase
 
 """1.4 锁仓"""
 # 1.4.1 锁仓分页查询
-server = "admin/lockDetail/page-query"
-data = {"endTime":"",
-        "startTime":"",
-        "status":"1",  # LOCKED("已锁定"),//0 UNLOCKED("已解锁"), //1 CANCLE("已撤销");//2
-        "coinUnit":"",
-        "userName":"",
-        "pageNo":"1",
-        "pageSize":"10"}
+# server = "admin/lockDetail/page-query"
+# data = {"endTime":"",
+#         "startTime":"",
+#         "status":"1",  # LOCKED("已锁定"),//0 UNLOCKED("已解锁"), //1 CANCLE("已撤销");//2
+#         "coinUnit":"",
+#         "userName":"",
+#         "pageNo":"1",
+#         "pageSize":"10"}
+
+"""4.1.6 实名审核系统审核人工确认"""
+id = "2182"
+server = "admin/member/member-application/{}/pass".format(id)
+data = {}
+r = request2DKApi(server, data).send("PATCH")
+
 
 
 
