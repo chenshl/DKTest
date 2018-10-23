@@ -5,7 +5,7 @@
 import copy
 
 class creatTestCase(object):
-    """自动生成基础参数接口测试用例"""
+    """自动生成基础参数接口测试用例用于单个接口调用测试"""
 
     def __init__(self, parmas={}):
         """

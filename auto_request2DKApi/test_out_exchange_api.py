@@ -23,7 +23,7 @@ class DKApiautoTest_exchange_out(unittest.TestCase):
             print("获取订单明细查询订单号错误{}".format(e))
 
         self.announcementID = "8"  # 公告内容接口公告ID
-        self.coinId = "6"  # 获取制定币种接口币种ID
+        self.coinId = "5"  # 获取制定币种接口币种ID
         self.coinName = "SLB"  # 资产查询接口币种ID
         self.symbol = "SLB/USDT"  # 币种对
         self.fromdate = "2018-07-23 00:00:00"  # 查询K线数据起始时间

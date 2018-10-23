@@ -50,7 +50,6 @@ class request2DKApi(object):
             self.reqtime = str(round((self.aftertime - self.beforetime) * 1000, 3))
             logger.info("响应时长：{}--响应状态:{}--响应结果：{}".format(self.reqtime,self.req.status_code, self.req.text))
         except Exception as e:
-            print("请求异常")
-            print(e)
+            print("请求异常：{}".format(e))
             logger.error("请求异常{}".format(e))
         return self.req.status_code, self.reqtime, self.req.text

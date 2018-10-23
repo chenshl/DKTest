@@ -12,9 +12,9 @@ class crazy_BTCGame(object):
     """
 
     # 游戏期数
-    configid = 6
+    configid = 16
     # 用户单注投注金额
-    user_bet_money = 200
+    user_bet_money = 100
     # 是否开启红包：1-是，0-否
     isredpackge = 1
 

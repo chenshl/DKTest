@@ -513,6 +513,12 @@ from common.base_creatTestCase import creatTestCase
 # 17.4 邮箱注册（uc/register/email）
 # 17.5 邮箱验证码的方式注册（uc/register/email4Code）
 # 17.6 发送邮件注册验证码（uc/register/email/code）
+server = "uc/register/email/code"
+data = {"email":"chen___007@163.com"
+        }
+
+
+
 # 17.7 手机注册（uc/register/phone）
 # 17.8 发送绑定邮箱验证码（uc/bind/email/code）
 # 17.9 增加提币地址验证码（uc/add/address/code）
@@ -562,8 +568,8 @@ from common.base_creatTestCase import creatTestCase
 # data = {}
 
 # 21.6 单一提现币种详细信息
-server = "uc/withdraw/support/coin/one"
-data = {"unit":"SLU"}
+# server = "uc/withdraw/support/coin/one"
+# data = {"unit":"SLU"}
 
 # 21.7 申请提币
 # server = "uc/withdraw/apply"
@@ -590,7 +596,11 @@ data = {"unit":"SLU"}
 #         }
 
 
-parmas = creatTestCase(data).creat_beseTestCase()
-for senddata in parmas:
-    r = request2DKApi(server, senddata).send()
-    print(r)
+# 自动脚本生成请求参数
+# parmas = creatTestCase(data).creat_beseTestCase()
+# for senddata in parmas:
+#     r = request2DKApi(server, senddata).send()
+#     print(r)
+
+r = request2DKApi(server, data).send()
+print(r)
