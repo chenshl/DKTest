@@ -4,7 +4,8 @@
 """基础数据配置"""
 
 # 请求路径配置
-REQUESTS_URL = "http://api.400.pro/"  # 前端
+REQUESTS_URL = "http://api.400.pro/"  # 前端测试环境地址
+# REQUESTS_URL = "http://api.dev.pro/"  # 前端联调环境地址
 REQUESTS_URL_ADMIN = "http://api.dkadmin.400.pro/"  # 后台
 
 # 用户token

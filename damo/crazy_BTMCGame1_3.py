@@ -13,7 +13,7 @@ class crazy_BTMCGame_up(object):
     """
 
     # 游戏期数
-    configid = 10
+    configid = 34
     # 用户单注投注金额
     user_bet_money = 100
 
@@ -25,6 +25,7 @@ class crazy_BTMCGame_up(object):
     except Exception as e:
         # print(e)
         before_money = 0
+        # before_money = 35380.44968840 + 2527.17497775
     print("上期奖池余额：{}".format(before_money))
 
     # 本期用户总投币数
@@ -138,14 +139,13 @@ class crazy_BTMCGame_up(object):
     if this_new_user_winning_num is None:
         this_old_user_winning_num = all_money * 0.65 - 0
     else:
-        this_old_user_winning_num = all_money * 0.65 - this_new_user_winning_num
+        this_old_user_winning_num = all_money * 0.65 - float(this_new_user_winning_num)
     print("本期老用户中奖金额：{}".format(this_old_user_winning_num))
 
     # 本期已领取中奖奖励
     try:
         received_money = float(connect_mysql().connect2mysql(
-            "SELECT SUM(reward_num) FROM pg_reward WHERE period_id = {} AND business_type = 0 AND `status` = 1;".format(
-                configid))[0][0])
+            "SELECT SUM(reward_num) FROM pg_reward WHERE period_id = {} AND business_type = 0 AND `status` = 1;".format(configid))[0][0])
     except Exception as e:
         # print(e)
         received_money = 0
@@ -182,16 +182,27 @@ class crazy_BTMCGame_up(object):
     print("本期奖池沉淀：{}".format(this_precipitation))
 
     # 本期中奖系数=中奖奖池/本期中奖BTMC总数
-    this_winning_factor = this_winning_pool / happy_money
+    if happy_money != 0:
+        this_winning_factor = this_winning_pool / happy_money
+    else:
+        this_winning_factor = 0
     print("本期中奖系数：{}".format(this_winning_factor))
 
     # 本期单个用户中奖数额计算=本期中奖系数*投注金额
-    this_user_wins_num = this_winning_factor * 100
+    this_user_wins_num = this_winning_factor * user_bet_money
     print("本期单个用户中奖数额计算：{}".format(this_user_wins_num))
 
-    # 下期奖池沉淀=5%总奖池固定沉淀+中奖用户未领取部分+红包未领取部分
+    # 下期奖池沉淀总数=5%总奖池固定沉淀+中奖用户未领取部分+红包未领取部分
     next_pool_precipitation = this_precipitation + (this_winning_pool - received_money) + (this_red_envelope - received_redpacket_money)
-    print("下期奖池沉淀：{}".format(next_pool_precipitation))
+    print("下期奖池沉淀总数：{}".format(next_pool_precipitation))
+
+    # 本期奖池剩余=5%总奖池固定沉淀+中奖用户未领取部分
+    next_pool_money = this_precipitation + (this_winning_pool - received_money)
+    print("本期奖池剩余：{}".format(next_pool_money))
+
+    # 本期红包剩余
+    next_redpacket_money = this_red_envelope - received_redpacket_money
+    print("本期红包剩余：{}".format(next_redpacket_money))
 
     # 本期回购总金额=15%总奖池固定回购+无推荐用户的分佣部分
     this_total_repurchase = this_repurchase + (this_recommended_dividends - push_money)

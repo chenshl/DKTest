@@ -34,6 +34,11 @@ class request2DKApi(object):
 
 
     def send(self, requestMark="POST"):
+        """
+        @description: 发送请求
+        :param requestMark: 请求方式
+        :return: 
+        """
         try:
             logger.info("请求地址：{}  请求方式：{}--请求参数：{}".format(self.url + self.server, requestMark, self.data))
             self.beforetime = time.time()
