@@ -11,14 +11,17 @@ class connect_mysql():
 
         # 连接数据库
         try:
+            # 测试库
             self.connect = pymysql.Connect(
                 host='172.16.0.66',
                 port=3306,
-                user='bjxy_db',
-                passwd='Credit2016Admin',
-                db='otc_sync',
+                user='***',
+                passwd='***',
+                db='***',
                 charset='utf8'
             )
+
+
         except Exception as e:
             print("连接数据库失败", e)
 
@@ -45,12 +48,13 @@ class connect_mysql():
             self.connect.close()
 
 if __name__ == "__main__":
-    sql = '''SELECT coin_id, balance, frozen_balance, lock_balance 
-    FROM member_wallet 
-    WHERE member_id = (SELECT id FROM member WHERE token = '1000000000001') AND coin_id IN('Silubium', 'USDT');
+    sql = '''SELECT id FROM member ORDER BY id DESC LIMIT 1;
     '''
     result = connect_mysql().connect2mysql(sql)
     print(type(result))
     print(result)
-    print(result[1][1])
+    print(len(result))
+    print(result[0][0])
+    print(int(result[0][0]) + 10)
+
     # print(type(result))
