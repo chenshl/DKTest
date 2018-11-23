@@ -1,11 +1,14 @@
 # coding:utf-8
 # @author : csl
+# @date   : 2018/10/30 10:57
 # 撮合器管理接口（维护人员）
 
 import requests
 
 class reqApi_maintain_monitor_1_0(object):
-    """"""
+    """
+    @description: 撮合器管理接口（维护人员）
+    """
 
     def extrade_monitor_plate_reset(self):
         """
@@ -54,10 +57,10 @@ class reqApi_maintain_monitor_1_0(object):
         日志查看的关键字：“cancelAllOrder：”
         :return: 
         """
-        url = "http://172.16.0.85:6005/extrade/monitor/cancelAllOrder?symbol=SLU/CNYT"
+        url = "http://172.16.0.85:6005/extrade/monitor/cancelAllOrder?symbol=SLU/USDT"
         r = requests.get(url)
         print(r.status_code, r.text)
 
 
 if __name__ == "__main__":
-    reqApi_maintain_monitor_1_0().extrade_monitor_resetTrader()
+    reqApi_maintain_monitor_1_0().extrade_monitor_cancelAllOrder()

@@ -1,43 +1,42 @@
 #!/usr/bin/python3
 # coding:utf-8
-import unittest
+
 from common.base_connect_mysql import connect_mysql
 from common.base import DKApiBase
 from common.writelog_up import WriteLogger
+from common.request2DKApi import request2DKApi
+import requests
+# import datetime
+import time
 
 logger = WriteLogger.getLogger()
 
-def setUpModule():
-    print("setUpModule")
 
-class damo1(unittest.TestCase):
+class damo1(object):
 
-    print("start...")
-    @classmethod
-    def setUpClass(cls):
-        print("输出setUpClass")
-        cls.aaa = "111"
+    # beging_date = "2018-11-21 17:05:00"
+    # print("开始时间",beging_date)
+    # timeArray = time.strptime(beging_date, "%Y-%m-%d %H:%M:%S")
+    # stime = int(round(time.mktime(timeArray)))
+    # print("初始时间戳",stime)
+    # tt = stime + 300
+    # t = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(tt))
+    # print("加5分钟后的时间", t)
 
-        # try:
-        #     cls.activitie_id_sql = """SELECT id1, `name`, activitie_id FROM lock_coin_activitie_setting WHERE coin_symbol = 'SLB' AND damages_calc_type = 1 ORDER BY id DESC;"""
-        #     cls.activitie_result = DKApiBase().mysqlResultFormat(connect_mysql().connect2mysql(cls.activitie_id_sql),["id", "name", "activitie_id"])
-        # except Exception as e:
-        #     e
-
-    def tearDown(self):
-        print("结果处理完成")
-
-
-    def test_0(self):
-        print("rrrrrr")
-        print(self.activitie_result)
-
-
-    def test_1(self):
-        print("test_1运行输出：{}".format(self.aaa))
-        print(self.activitie_result)
+    # 游戏投票开始时间
+    begin_time = "2018-11-21 17:05:00"
+    timeArray = time.strptime(begin_time, "%Y-%m-%d %H:%M:%S")
+    # 初始时间转换成时间戳
+    stime = int(round(time.mktime(timeArray)))
+    end_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stime + 600))
+    open_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stime + 900))
+    prize_end_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stime + 1500))
+    print("开始时间", begin_time)
+    print("结束时间", end_time)
+    print("开奖时间", open_time)
+    print("红包领取结束时间", prize_end_time)
 
 
 
 if __name__ == '__main__':
-    unittest.main()
+    damo1()

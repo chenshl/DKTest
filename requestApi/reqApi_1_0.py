@@ -39,6 +39,7 @@ class reqApi_1_0(object):
         def exchange_order_add_batch(self):
                 """
                 2.1、批量订单委托接口，创建订单深度
+                @description: 查看交易盘口地址：http://www.400.pro/#/exchangemore/slu_cnyt
                 :return: 
                 """
                 for i in range (50386, 50537):
@@ -258,6 +259,29 @@ class reqApi_1_0(object):
                 r = request2DKApi(serverc, data).send()
                 print(r)
 
+        def uc_activity_joinStoLock(self):
+                """
+                @description: CNYT锁仓，模拟多个用户锁仓
+                :return: 
+                """
+                user_mobile = ["17700000020", "17700000021"]
+                for username in user_mobile:
+                        server = "uc/login"
+                        data = {"username": username,
+                                "password": DKApiBase().getSign("cs111111" + "hello, moto"),
+                                "type": 0}
+                        r = request2DKApi(server, data).send()
+                        print(r)
+
+                        serverc = "uc/activity/joinStoLock"
+                        jyPassword = "111111"
+                        header = {"access-auth-token": "{}".format(username)}
+                        data = {"id":"50",
+                                "cnyAmount":"1000",
+                                "jyPassword":DKApiBase().getSign(jyPassword + "hello, moto")}
+                        r = request2DKApi(serverc, data, header).send()
+                        print(r)
+
 
 if __name__ == "__main__":
-        reqApi_1_0().exchange_order_add_batch()
+        reqApi_1_0().uc_activity_joinStoLock()

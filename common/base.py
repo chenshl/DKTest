@@ -47,6 +47,12 @@ class DKApiBase(object):
 
     # 格式化mysql查询结果,将元组转换为字典格式
     def mysqlResultFormat(self, data=((),), parameter_name=[]):
+        """
+        @descreption: 如果传入的元组里面只有一个元素，直接返回字典；如果传入的元组里面有多个元素则返回包含多个字典的列表
+        :param data: 
+        :param parameter_name: 
+        :return: dict/list
+        """
         result = []
         if isinstance(data, tuple) and data:  # 判断data是一个元组并且不为空
             for tuple_data in data:
@@ -69,7 +75,10 @@ class DKApiBase(object):
         else:
             print("{}为空或者不为一个元组，请核对后传入！！！".format(data))
 
-        return result
+        if len(result) == 1:
+            return result[0]
+        else:
+            return result
 
 
 
@@ -77,34 +86,6 @@ class DKApiBase(object):
 
 
 
-# if __name__ == "__main__":
-#     print(DKApiBase().mysqlResultFormat())
-#     jsonstr = DKApiBase().str2json('{"code":0,"message":"success","data":null}')
-#     print(type(jsonstr), jsonstr)
-#     str = '''{
-#           "code" : 0,
-#           "message" : "SUCCESS",
-#           "data" : [ {
-#             "id" : 107,
-#             "advertiseType" : 1,
-#             "minLimit" : 100.00,
-#             "maxLimit" : 1000.00,
-#             "status" : 1,
-#             "remainAmount" : 10000.00000000,
-#             "coinUnit" : "USDT",
-#             "price" : 6.82,
-#             "createTime" : "2018-08-02 14:02:08",
-#             "country" : {
-#               "zhName" : "中国",
-#               "enName" : "China",
-#               "areaCode" : "86",
-#               "language" : "zh_CN",
-#               "localCurrency" : "CNY",
-#               "sort" : 0
-#             },
-#             "priceType" : 0,
-#             "premiseRate" : "null"
-#           } ]
-#         }'''
-#     jsonstr = DKApiBase().str2json(str)
-#     print(jsonstr["data"][0]["id"])
+if __name__ == "__main__":
+    r = DKApiBase().mysqlResultFormat(((0, 1),), ["a", "b"])
+    print(r)

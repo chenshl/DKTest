@@ -16,23 +16,28 @@ class reqApi_c2c_1_0(object):
         """
         jyPassword = "111111"
         server = "otc/advertise/create"
-        data = {"price":"6.82",
-                "advertiseType":"1",
-                "coin.id":"2",
+        data = {"price":"1",
+                "advertiseType":"1",  # 0买，1卖
+                "coin.id":"13",
                 "minLimit":"100",
                 "maxLimit":"1000",
-                "timeLimit":"15",
+                "timeLimit":"30",
                 "country":"中国",
                 "priceType":"0",
                 "premiseRate":"",
-                "remark":"测试广告",
-                "number":"10000",
-                "pay[]":"微信",
-                "auto":"1",
+                "remark":"测试广告,自动化脚本添加",
+                "number":"1000",
+                "pay[]":"银联",
+                "auto":"1",  # 是否开启自动回复0否1是，默认否
                 "autoword":"先付款，后放币",
+                "needBindPhone":"1",  # 是否需要交易方已绑定手机号，0：不需要，1：需要
+                "needRealname":"1",   # 是否需要交易方已做实名认证，0：不需要，1：需要
+                "needTradeTimes":"10",  # 需要交易方至少完成过N笔交易（默认为0）
+                "needPutonDiscount":"1",  # 是否使用优惠币种支付，0：不使用，1：使用
+                "bindingResult":"",  # 绑定结果,非必传项
                 "jyPassword":DKApiBase().getSign(jyPassword + "hello, moto")
                 }
-        r = request2DKApi(server, data).send()
+        r = request2DKApi(server, data,).send()
         print(r)
 
     def otc_advertise_all(self):
@@ -108,7 +113,7 @@ class reqApi_c2c_1_0(object):
         :return: 
         """
         server = "otc/advertise/off/shelves"
-        data = {"id":"94"}
+        data = {"id":"291"}
         r = request2DKApi(server, data).send()
         print(r)
 
@@ -139,9 +144,9 @@ class reqApi_c2c_1_0(object):
         """
         server = "otc/advertise/page"
         data = {"pageNo":"0",  # 非必传
-                "pageSize":"10",  # 非必传
-                "advertiseType":"0",  # 条件：0买、1卖
-                "id":"2",  # 币种id  otc_coin表
+                "pageSize":"5",  # 非必传
+                "advertiseType":"1",  # 条件：0买、1卖
+                "id":"13",  # 币种id  otc_coin表
                 "isCertified":"0"  # 是否只显示认证商家.1:是0：否  # 非必传
                 }
         r = request2DKApi(server, data).send()
@@ -305,7 +310,7 @@ class reqApi_c2c_1_0(object):
         :return: 
         """
         server = "otc/coin/pcall"
-        data = {"memberId":"74773"}
+        data = {"memberId":"80068"}
         r = request2DKApi(server, data).send()
         print(r)
 
@@ -322,4 +327,5 @@ class reqApi_c2c_1_0(object):
 
 
 if __name__ == "__main__":
-    reqApi_c2c_1_0().otc_coin_all()
+    reqApi_c2c_1_0().otc_advertise_page()
+    # reqApi_c2c_1_0().otc_advertise_create()

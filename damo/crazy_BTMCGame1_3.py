@@ -13,15 +13,15 @@ class crazy_BTMCGame_up(object):
     """
 
     # 游戏期数
-    configid = 34
+    configid = 63
     # 用户单注投注金额
-    user_bet_money = 100
+    user_bet_money = 10
 
     # 数据库基础数据查询
     print("************由数据库查询获得的基础数据************")
     # 上期奖池总结余=上期分配结余+上期红包结余
     try:
-        before_money = float(connect_mysql().connect2mysql("SELECT SUM(jackpot_balance + redpacket_balance) FROM pg_jackpot WHERE period_id = {};".format(configid - 1))[0][0])
+        before_money = float(connect_mysql().connect2mysql("SELECT (jackpot_balance + redpacket_balance) FROM pg_jackpot WHERE id = (SELECT id - 1 FROM pg_jackpot ORDER BY id DESC LIMIT 1);")[0][0])
     except Exception as e:
         # print(e)
         before_money = 0

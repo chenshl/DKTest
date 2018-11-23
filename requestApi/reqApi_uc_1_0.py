@@ -353,11 +353,14 @@ class reqApi_uc_1_0(object):
                 :return: 
                 """
                 server = "uc/approve/transaction/password"
-                data = {"jyPassword":"111111"}
+                data = {"jyPassword":"111111",
+                        "code":"429389",
+                        "codeType":"0"  # 0手机，1邮箱
+                        }
                 r = request2DKApi(server, data).send()
                 print(r)
 
-        def uc_approve_transaction_password(self):
+        def uc_approve_transaction_password_batch(self):
                 """
                 4.6.1 批量设置资金密码
                 :return: 
@@ -894,13 +897,13 @@ class reqApi_uc_1_0(object):
         def uc_login(self):
                 """
                 14 登录
-                14.1 登录（待调试）
+                14.1 登录
                 :return: 
                 """
                 server = "uc/login"
-                data = {"username":"",
-                        "password":"",
-                        "type":""}
+                data = {"username":"17700000041",
+                        "password":DKApiBase().getSign("cs111111" + "hello, moto"),
+                        "type":0}
                 r = request2DKApi(server, data).send()
                 print(r)
 
@@ -1225,4 +1228,5 @@ class reqApi_uc_1_0(object):
         # print(r)
 
 if __name__ == "__main__":
-        reqApi_uc_1_0().uc_withdraw_support_coin()
+        reqApi_uc_1_0().uc_login()
+        # reqApi_uc_1_0().uc_check_login()
