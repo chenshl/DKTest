@@ -20,7 +20,7 @@ class reqApi_maintain_monitor_1_0(object):
         查看交易盘口地址：http://www.400.pro/#/exchangemore/slu_cnyt
         :return: 
         """
-        url = "http://172.16.0.85:6005/extrade/monitor/plate-reset?symbol=SLU/CNYT&direction=BUY"
+        url = ""
         r = requests.get(url)
         print(r.status_code, r.text)
 
@@ -32,7 +32,7 @@ class reqApi_maintain_monitor_1_0(object):
         symbol 交易对，必填
         :return: 
         """
-        url = "http://172.16.0.85:6005/extrade/monitor/stopTrader?symbol=SLU/CNYT"
+        url = ""
         r = requests.get(url)
         print(r.status_code, r.text)
 
@@ -44,7 +44,7 @@ class reqApi_maintain_monitor_1_0(object):
         symbol 交易对，必填
         :return: 
         """
-        url = "http://172.16.0.85:6005/extrade/monitor/resetTrader?symbol=SLU/CNYT"
+        url = ""
         r = requests.get(url)
         print(r.status_code, r.text)
 
@@ -57,7 +57,7 @@ class reqApi_maintain_monitor_1_0(object):
         日志查看的关键字：“cancelAllOrder：”
         :return: 
         """
-        url = "http://172.16.0.85:6005/extrade/monitor/cancelAllOrder?symbol=SLU/USDT"
+        url = ""
         r = requests.get(url)
         print(r.status_code, r.text)
 
